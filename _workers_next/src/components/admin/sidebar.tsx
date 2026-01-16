@@ -19,7 +19,7 @@ export function AdminSidebar({ username }: { username: string }) {
                     <Link href="/admin/settings"><Settings className="mr-2 h-4 w-4" />{t('common.storeSettings')}</Link>
                 </Button>
                 <Button variant="ghost" asChild className="justify-start">
-                    <Link href="/admin"><Package className="mr-2 h-4 w-4" />{t('common.productManagement')}</Link>
+                    <Link href="/admin/products"><Package className="mr-2 h-4 w-4" />{t('common.productManagement')}</Link>
                 </Button>
                 <Button variant="ghost" asChild className="justify-start">
                     <Link href="/admin/orders"><CreditCard className="mr-2 h-4 w-4" />{t('common.ordersRefunds')}</Link>

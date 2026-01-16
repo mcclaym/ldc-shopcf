@@ -112,28 +112,32 @@ export async function saveProduct(formData: FormData) {
         }
     }
 
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/')
 }
 
 export async function deleteProduct(id: string) {
     await checkAdmin()
     await db.delete(products).where(eq(products.id, id))
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/')
 }
 
 export async function toggleProductStatus(id: string, isActive: boolean) {
     await checkAdmin()
     await db.update(products).set({ isActive }).where(eq(products.id, id))
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/')
 }
 
 export async function reorderProduct(id: string, newOrder: number) {
     await checkAdmin()
     await db.update(products).set({ sortOrder: newOrder }).where(eq(products.id, id))
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/')
 }
 
@@ -168,7 +172,8 @@ export async function addCards(formData: FormData) {
         )
     }
 
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath(`/admin/cards/${productId}`)
     revalidatePath('/')
 }
@@ -194,7 +199,8 @@ export async function deleteCard(cardId: number) {
 
     await db.delete(cards).where(eq(cards.id, cardId))
 
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/admin/cards')
     revalidatePath('/')
 }
@@ -231,7 +237,8 @@ export async function saveShopName(rawName: string) {
     }
 
     revalidatePath('/')
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
 }
 
 export async function saveShopDescription(rawDesc: string) {
@@ -244,7 +251,8 @@ export async function saveShopDescription(rawDesc: string) {
 
     await setSetting('shop_description', desc)
     revalidatePath('/')
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
 }
 
 export async function saveShopLogo(logoUrl: string) {
@@ -257,7 +265,8 @@ export async function saveShopLogo(logoUrl: string) {
 
     await setSetting('shop_logo', url)
     revalidatePath('/')
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/admin/settings')
 }
 
@@ -272,7 +281,8 @@ export async function saveLowStockThreshold(raw: string) {
     const n = Number.parseInt(String(raw || '').trim(), 10)
     const value = Number.isFinite(n) && n > 0 ? String(n) : '5'
     await setSetting('low_stock_threshold', value)
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
 }
 
 export async function saveCheckinReward(raw: string) {
@@ -281,20 +291,23 @@ export async function saveCheckinReward(raw: string) {
     const value = Number.isFinite(n) && n > 0 ? String(n) : '10'
     await setSetting('checkin_reward', value)
     await setSetting('checkin_reward', value)
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
 }
 
 export async function saveCheckinEnabled(enabled: boolean) {
     await checkAdmin()
     await setSetting('checkin_enabled', enabled ? 'true' : 'false')
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/')
 }
 
 export async function saveNoIndex(enabled: boolean) {
     await checkAdmin()
     await setSetting('noindex_enabled', enabled ? 'true' : 'false')
-    revalidatePath('/admin')
+    revalidatePath('/admin/products')
+    revalidatePath('/admin/settings')
     revalidatePath('/')
 }
 

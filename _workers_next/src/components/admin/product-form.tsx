@@ -22,7 +22,7 @@ export default function ProductForm({ product, categories = [] }: { product?: an
         try {
             await saveProduct(formData)
             toast.success(t('common.success'))
-            router.push('/admin')
+            router.push('/admin/products')
         } catch (e: any) {
             console.error('Save product error:', e)
             toast.error(e?.message || t('common.error'))
